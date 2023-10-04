@@ -35,6 +35,29 @@ pipeline {
         }
         stage('Run tests against the container') {
             steps {
+                          script {
+                    def containerName = "miniprojet-frontend-1"
+                    def maxAttempts = 30  // Adjust the number of attempts as needed
+                    def waitTime = 10     // Adjust the wait time (in seconds) as needed
+                    def attempts = 0
+
+                    while (attempts < maxAttempts) {
+                        def containerStatus = sh(script: "docker ps --filter name=${containerName} --format '{{.Status}}'", returnStatus: true, returnStdout: true).trim()
+                        if (containerStatus.contains("Up")) {
+                            echo 'Container is up and running.'
+                            break
+                        } else {
+                            echo "Container is not yet ready. Retrying in ${waitTime} seconds..."
+                            sleep(waitTime)
+                            attempts++
+                        }
+                    }
+
+                    if (attempts == maxAttempts) {
+                        error 'Container did not start within the expected time.'
+                    }
+                }
+                
                 sh 'curl http://host.docker.internal:3000'
                 echo 'Frontend worked successfully'
                 sh 'curl http://host.docker.internal:8000'
