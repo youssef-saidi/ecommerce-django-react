@@ -38,6 +38,7 @@ pipeline {
                 sh 'docker ps'
             }
         }
+    }
         post {
             always {
                 sh 'docker compose down --remove-orphans -v'
@@ -45,4 +46,3 @@ pipeline {
             }
         }
     }
-}
