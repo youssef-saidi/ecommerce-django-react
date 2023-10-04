@@ -43,6 +43,7 @@ pipeline {
 
                     while (attempts < maxAttempts) {
                         def containerStatus = sh(script: "docker ps --filter name=${containerName} --format '{{.Status}}'", returnStatus: true, returnStdout: true).toString().trim()
+                        echo ${containerStatus}
                         if (containerStatus.contains("Up")) {
                             echo 'Container is up and running.'
                             break
