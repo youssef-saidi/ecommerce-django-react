@@ -15,9 +15,9 @@ services:
 
   backend:
     build: ./back
-    command: sh -c "ls && ./sql/wait.sh && python manage.py migrate  && mysql -h db -u youssef -proot miniprojet < /app/sql/init.sql && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "./sql/wait.sh && python manage.py migrate  && mysql -h db -u youssef -proot miniprojet < /appp/sql/init.sql && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ./back:/app
+      - ./back:/appp
     ports:
       - "8000:8000"
     depends_on:
@@ -30,7 +30,7 @@ services:
   frontend:
     build: ./frontend
     volumes:
-      - ./frontend:/app
+      - ./frontend:/appp
     ports:
       - "3000:3000"
     depends_on:
