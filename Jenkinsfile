@@ -37,7 +37,7 @@ pipeline {
             steps {
                           script {
                     def containerName1 = "miniprojet-frontend-1"
-                    def containerName1 = "miniprojet-backend-1"
+                    def containerName2 = "miniprojet-backend-1"
 
                     def maxAttempts = 5  // Adjust the number of attempts as needed
                     def waitTime = 10     // Adjust the wait time (in seconds) as needed
