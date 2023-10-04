@@ -15,7 +15,7 @@ services:
 
   backend:
     build: ./back
-    command: sh -c "./sql/wait.sh && python manage.py migrate  && mysql -h db -u youssef -proot miniprojet < /appp/sql/init.sql && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "./sql/wait.sh && python manage.py migrate  && mysql -h db -u youssef -proot miniprojet < ./sql/init.sql && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./back:/appp
     ports:
