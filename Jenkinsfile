@@ -35,7 +35,10 @@ pipeline {
         }
         stage('Run tests against the container') {
             steps {
-                sh 'docker ps'
+                sh 'curl http://host.docker.internal:3000'
+                echo 'Frontend worked successfully'
+                sh 'curl http://host.docker.internal:8000'
+                echo 'Backend worked successfully'
             }
         }
     }
