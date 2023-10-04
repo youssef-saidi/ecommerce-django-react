@@ -89,7 +89,7 @@ DATABASES = {
         'USER': 'youssef',
         'PASSWORD': 'root',
         'HOST': 'db',
-        'PORT': '3307',
+        'PORT': '3306',
     }
 }
 AUTHENTICATION_BACKENDS = [
