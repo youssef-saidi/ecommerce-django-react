@@ -37,13 +37,13 @@ pipeline {
             steps {
                           script {
                     def containerName = "miniprojet-frontend-1"
-                    def maxAttempts = 30  // Adjust the number of attempts as needed
+                    def maxAttempts = 5  // Adjust the number of attempts as needed
                     def waitTime = 10     // Adjust the wait time (in seconds) as needed
                     def attempts = 0
 
                     while (attempts < maxAttempts) {
                         def containerStatus = sh(script: "docker ps --filter name=${containerName} --format '{{.Status}}'", returnStatus: true, returnStdout: true).toString().trim()
-                        echo ${containerStatus}
+                        echo "status ::::::${containerStatus} ..."
                         if (containerStatus.contains("Up")) {
                             echo 'Container is up and running.'
                             break
