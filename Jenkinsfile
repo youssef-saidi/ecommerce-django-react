@@ -36,19 +36,16 @@ pipeline {
         stage('Run tests against the container') {
             steps {
                           script {
-                    def containerName1 = "miniprojet-frontend-1"
-                    def containerName2 = "miniprojet-backend-1"
-
+                    def containerName = "miniprojet-frontend-1"
                     def maxAttempts = 5  // Adjust the number of attempts as needed
                     def waitTime = 10     // Adjust the wait time (in seconds) as needed
                     def attempts = 0
 
                     while (attempts < maxAttempts) {
-                        def containerStatus = sh(returnStdout: true,script: "docker ps --filter name=${containerName1} --filter name=${containerName2} --format '{{.Status}}'")
-
-                        def upCount = (containerStatus =~ /Up/).size()
-                        echo "count ::::::${upCount} ..."
-                        if (upCount == 2) {
+                        def containerStatus = sh(returnStdout: true,script: "docker ps --filter name=${containerName} --format '{{.Status}}'")
+                        echo "status ::::::${containerStatus} ..."
+                        if (containerStatus.contains("Up")) {
+                            sleep(waitTime)
                             echo 'Container is up and running.'
                             break
                         } else {
